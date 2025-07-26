@@ -1,13 +1,12 @@
 name: workflow_1
 on: push
-
 jobs:
   omar:
     runs-on: ubuntu-latest
     steps:
       - name: welcome
-        run: echo "Welcome to Omar's workflow!"
-      - name: cow sa
         run: |
+          sudo apt-get update -y
+          sudo apt-get install -y cowsay  
           cowsay -f dragon "dragon is here!" >> dragon.txt
           cat dragon.txt
