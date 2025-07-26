@@ -1,7 +1,11 @@
+# .github/workflows/docker-publish.yml
+
 name: Docker Build and Push
 
 on:
   push:
+    branches:
+      - main  # Recommended: only run on pushes to your main branch
 
 env:
   CONTAINER_REGISTRY: docker.io
@@ -15,10 +19,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # This step will now work because secrets.DOCKER_USERNAME is populated
       - name: Build Docker Image
         run: |
           docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest .
 
+      # This step will now work because both secrets are populated
       - name: Login to DockerHub
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ${{ env.CONTAINER_REGISTRY }} \
