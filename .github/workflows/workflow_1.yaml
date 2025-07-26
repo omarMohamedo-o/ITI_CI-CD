@@ -4,6 +4,8 @@ jobs:
   omar:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
       - name: welcome
         run: |
           sudo apt-get update -y
@@ -13,4 +15,5 @@ jobs:
 
       - name: show read me
         run: |
+          ls -ltrah
           cat README.md
