@@ -26,7 +26,6 @@ jobs:
           path: dragon.txt
           
   show_readme:
-    needs: omar
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -35,4 +34,4 @@ jobs:
       - name: Run show_readme.sh script
         run: |
           chmod +x .github/workflows/show_readme.sh
-          .github/workflows/show_readme.sh
+          sh .github/workflows/show_readme.sh
