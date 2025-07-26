@@ -24,12 +24,12 @@ jobs:
         with:
           name: dragon-output
           path: dragon.txt
-
+          
   show_readme:
     needs: omar
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Run show_readme.sh script
