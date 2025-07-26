@@ -6,7 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: welcome
+<<<<<<< HEAD
         run: echo "Welcome to Omar's workflow!"
       - name: cow sa
         run: |
           cowsay -f dragon "dragon is here!" >> dragon.txt
+=======
+        run: echo "Welcome to Omar's workflow!"   
+>>>>>>> 703e2c758320e3bdfd9be6f0713ad80e186095f1
