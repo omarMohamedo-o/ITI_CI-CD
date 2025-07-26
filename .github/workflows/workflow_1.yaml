@@ -1,0 +1,16 @@
+name: workflow_1
+on: push
+
+
+jobs:
+  omar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: welcome
+        run: echo "Welcome to Omar's workflow!"
+
+      # - name: Run Omar's script
+      #   run: |
+      #     echo "Running Omar's script..."
+      #     # Add your script commands here
+      #     echo "Script completed successfully!"      
