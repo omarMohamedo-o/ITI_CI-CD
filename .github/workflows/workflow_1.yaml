@@ -1,36 +1,38 @@
 name: workflow_1
 
 on: push
+
 jobs:
   omar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Welcome
         run: echo "Welcome to Omar's workflow!"
+
       - name: Cow Say
         run: |
           sudo apt-get update -y
           sudo apt-get install -y cowsay  
           cowsay -f dragon "dragon is here!" >> dragon.txt
           cat dragon.txt
+
       - name: Save dragon.txt as artifact
         uses: actions/upload-artifact@v4
         with:
           name: dragon-output
           path: dragon.txt
+
   show_readme:
     needs: omar
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: List Files and Show README
+
+      - name: Run show_readme.sh script
         run: |
-          ls -ltrah
-          cat README.md
-      - name: Download dragon.txt (optional)
-        uses: actions/download-artifact@v4
-        with:
-          name: dragon-output
+          chmod +x ./show_readme.sh
+          ./show_readme.sh
