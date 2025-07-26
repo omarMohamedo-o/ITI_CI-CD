@@ -5,14 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: welcome
+        run: echo "Welcome to Omar's workflow!"
+      - name: cow sa
         run: |
           sudo apt-get update -y
           sudo apt-get install -y cowsay  
           cowsay -f dragon "dragon is here!" >> dragon.txt
           cat dragon.txt
-
       - name: show read me
         run: |
           ls -ltrah
