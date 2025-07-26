@@ -34,5 +34,5 @@ jobs:
 
       - name: Run show_readme.sh script
         run: |
-          chmod +x ./show_readme.sh
-          ./show_readme.sh
+          chmod +x .github/workflows/show_readme.sh
+          .github/workflows/show_readme.sh
