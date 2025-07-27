@@ -1,37 +1,49 @@
-name: workflow_1
-
+name: workflow 1
 on: push
 
+concurrency:
+          group: production-deployment
+          cancel-in-progress: true
 jobs:
-  omar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Welcome
-        run: echo "Welcome to Omar's workflow!"
-
-      - name: Cow Say
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y cowsay  
-          cowsay -f dragon "dragon is here!" >> dragon.txt
-          cat dragon.txt
-
-      - name: Save dragon.txt as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dragon-output
-          path: dragon.txt
-          
-  show_readme:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run show_readme.sh script
-        run: |
-          chmod +x .github/workflows/show_readme.sh
-          sh .github/workflows/show_readme.sh
+    omar:
+        timeout-minutes: 5
+        # concurrency:
+        #   group: production-deployment
+        #   cancel-in-progress: true
+        needs: omar
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: Welcome 
+              run: |
+                echo "Hello world"
+            - name: download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                name: artifact
+                path: dragon
+            - name: cat dragon.txt
+              run: |
+                cat dragon/dragon.txt
+                sleep 6000
+    omar:
+        # concurrency:
+        #   group: production-deployment
+        #   cancel-in-progress: true
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: script
+              run: |
+                ls -ltra
+                chmod +x .github/workflows/script.sh 
+                sh .github/workflows/script.sh
+            - name: upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: artifact
+                path: dragon.txt
+                retention-days: 1
+                
